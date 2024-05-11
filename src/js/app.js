@@ -1,10 +1,25 @@
-import Bowman from './Class/Bowman';
-import Daemon from './Class/Daemon';
-import Magician from './Class/Magician';
-import Swordsman from './Class/Swordsman';
-import Undead from './Class/Undead';
-import Zombie from './Class/Zombie';
+export default function orderByProps(obj, order) {
+    let a = new Array();
+    let b = new Array();
+    let mergedArr = new Array();
+   
+    for(let key in obj) {
+        if (order.includes(key)) {
+            a.push({key: key, value: obj[key]})
+        } else {
+            b.push({key: key, value: obj[key]})
+        };
+    };
 
-export function chars () {
-    return {Bowman, Swordsman, Magician, Daemon, Undead, Zombie};
+    b.sort((a, b) => {
+        if (a.key >= b.key) {
+          return 1;
+        } else {
+          return -1;
+        }
+    });
+
+    mergedArr = [...a, ...b];
+    return mergedArr
 };
+
