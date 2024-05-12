@@ -10,16 +10,12 @@ export default function destructuring(obj) {
             obj.special[i].description = description;
         };
 
-        obj.special[i].id = id;
-        obj.special[i].name = name;
-        obj.special[i].icon = icon;
-
         //Формирование
         a.push({
-            id: obj.special[i].id,
-            name: obj.special[i].name, 
+            id: obj.special[i].id = id,
+            name: obj.special[i].name = name, 
             description: obj.special[i].description, 
-            icon: obj.special[i].icon
+            icon: obj.special[i].icon = icon
         });
     };
 
