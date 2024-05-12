@@ -1,25 +1,28 @@
-export default function orderByProps(obj, order) {
+export default function destructuring(obj) {
     let a = new Array();
-    let b = new Array();
-    let mergedArr = new Array();
-   
-    for(let key in obj) {
-        if (order.includes(key)) {
-            a.push({key: key, value: obj[key]})
+    for(let i = 0; i < obj.special.length; i++) {
+        const {id, name, description, icon} = obj.special[i];
+
+        //Присваивание
+        if(description === undefined) {
+            obj.special[i].description = 'Описание недоступно';
         } else {
-            b.push({key: key, value: obj[key]})
+            obj.special[i].description = description;
         };
+
+        obj.special[i].id = id;
+        obj.special[i].name = name;
+        obj.special[i].icon = icon;
+
+        //Формирование
+        a.push({
+            id: obj.special[i].id,
+            name: obj.special[i].name, 
+            description: obj.special[i].description, 
+            icon: obj.special[i].icon
+        });
     };
 
-    b.sort((a, b) => {
-        if (a.key >= b.key) {
-          return 1;
-        } else {
-          return -1;
-        }
-    });
-
-    mergedArr = [...a, ...b];
-    return mergedArr
+    return a;
 };
 
