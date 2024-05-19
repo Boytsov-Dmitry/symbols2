@@ -1,24 +1,10 @@
-export default function destructuring(obj) {
-    let a = new Array();
-    for(let i = 0; i < obj.special.length; i++) {
-        const {id, name, description, icon} = obj.special[i];
-
-        //Присваивание
-        if(description === undefined) {
-            obj.special[i].description = 'Описание недоступно';
-        } else {
-            obj.special[i].description = description;
-        };
-
-        //Формирование
-        a.push({
-            id: obj.special[i].id = id,
-            name: obj.special[i].name = name, 
-            description: obj.special[i].description, 
-            icon: obj.special[i].icon = icon
-        });
+export default class Validator {
+    constructor (userName) {
+        this.userName = userName;    
     };
-
-    return a;
+  
+    validateUsername(str) {
+        str = this.userName;
+        return /^[a-z][a-z-_]*[\d]{0,3}[a-z-_]*[a-z]$/.test(str.toLowerCase());
+    };
 };
-
