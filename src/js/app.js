@@ -1,23 +1,17 @@
-export default class Team {
-    constructor() {
-        this.members = new Set();
-    }
-    
-    add(character) {
-        if(this.members.has(character)) {
-            throw new Error(`Персонаж '${character}' уже добавлен в команду`)
-        } else {
-            this.members.add(character);
-        };        
+export default class ErrorRepository {
+    constructor(errorId, errorText) {
+        this.errors = new Map();
+        this.errorId = errorId;
+        this.errors.set(
+            this.errorId, 
+            {errorId, errorText}
+        );
     };
-
-    addAll(...players) {
-        for(const character of players) {
-            this.members.add(character);
+    
+    translate(code) {
+        if (!this.errors.has(code)) {
+            throw new Error('Unknown error');
         };
-    };
-    
-    toArray() {
-        return Array.from(this.members)
+        return this.errors.get(code).errorText;
     };
 };
