@@ -1,10 +1,23 @@
-export default class Validator {
-    constructor (userName) {
-        this.userName = userName;    
+export default class Team {
+    constructor() {
+        this.members = new Set();
+    }
+    
+    add(character) {
+        if(this.members.has(character)) {
+            throw new Error(`Персонаж '${character}' уже добавлен в команду`)
+        } else {
+            this.members.add(character);
+        };        
     };
-  
-    validateUsername(str) {
-        str = this.userName;
-        return /^[a-z][a-z-_]*[\d]{0,3}[a-z-_]*[a-z]$/.test(str.toLowerCase());
+
+    addAll(...players) {
+        for(const character of players) {
+            this.members.add(character);
+        };
+    };
+    
+    toArray() {
+        return Array.from(this.members)
     };
 };
