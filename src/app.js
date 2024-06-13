@@ -11,27 +11,23 @@ class GameSaving {
   
 
 class GameSavingLoader {
-    static load() {
-            return read()
-        .then(response => {
-            return json(response);
-        })
-        .then(data =>{
-            let loadgs = new GameSaving();
-            loadgs = JSON.parse(data);
-            return loadgs;
-        })
-        .catch(error => reject(error));
+    static async load() {
+        const a = await read();
+        const b = await json(a);
+        let loadgs = new GameSaving();
+        loadgs = JSON.parse(b);
+        return loadgs;
     };
 };
 
 
-export default function loadGS() {
-    return GameSavingLoader.load().then((saving) => {
-        return saving
-        }, (error) => {
+export default async function loadGS() {
+    try {
+        return await GameSavingLoader.load()
+    }
+    catch (error) {
         return error
-    });
+    };
 };
 
 
